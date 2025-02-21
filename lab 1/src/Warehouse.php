@@ -1,13 +1,14 @@
 <?php
 
-class Warehouse {
+require_once 'IInventory.php';
+class Warehouse implements IInventory {
     private array $products = [];
 
     public function addProduct(Product $product): void {
         $this->products[] = $product;
     }
 
-    public function getProducts(): array {
+    public function getInventory(): array {
         return $this->products;
     }
 }

@@ -1,5 +1,7 @@
 <?php
-class Product {
+
+require_once 'IReportable.php';
+class Product implements IReportable {
     private string $name;
     private Money $price;
 
@@ -7,16 +9,20 @@ class Product {
         $this->name = $name;
         $this->price = $price;
     }
+
     public function getName(): string {
         return $this->name;
     }
-    public function getPrice(): Money
-    {
+
+    public function getPrice(): Money {
         return $this->price;
     }
 
     public function decreasePrice(int $whole, int $cents): void {
-        $newWhole = $this->price->getAmount() - ($whole + $cents / 100);
-        $this->price = new Money((int)$newWhole, (int)(($newWhole - (int)$newWhole) * 100));
+        $this->price = $this->price->decrease($whole, $cents);
+    }
+
+    public function getDescription(): string {
+        return "Назва: $this->name, Ціна: " . $this->price->getAmount() . "$";
     }
 }
