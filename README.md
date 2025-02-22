@@ -12,7 +12,7 @@ The Money class encapsulates currency logic, avoiding redundant operations acros
 
 Example: Instead of recalculating the price format in different places, Money::getAmount() provides a single method for retrieving the price.
 
-[DRY](https://github.com/vt231sao/-software-design/blob/8636d632681c6f8dbe25e5d6cd40e663ecad5d4c/lab%201/src/Money.php#L15-L17)
+[Money](https://github.com/vt231sao/-software-design/blob/8636d632681c6f8dbe25e5d6cd40e663ecad5d4c/lab%201/src/Money.php#L15-L17)
 
 2. KISS (Keep It Simple, Stupid)
 
