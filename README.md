@@ -20,7 +20,7 @@ Each class has a clear and concise purpose. The system avoids unnecessary comple
 
 Example: The Warehouse class is responsible only for managing products, without additional functionality.
 
-Warehouse.php#L7-L15
+[WareHouse](./lab 1/src/Warehouse.php#L7-L15)
 
 3. SOLID Principles
 
