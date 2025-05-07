@@ -70,4 +70,39 @@ class LightElementNode implements LightNode {
         $this->cssClasses = array_filter($this->cssClasses, fn($cls) => $cls !== $className);
     }
 
+
+    private ElementState $state;
+
+    public function setState(ElementState $state): void {
+        $this->state = $state;
+    }
+
+    public function getState(): string {
+        return $this->state->getName();
+    }
+
+    public function defaultRender(): string {
+        $classAttr = empty($this->cssClasses) ? '' : ' class="' . implode(' ', $this->cssClasses) . '"';
+        if ($this->selfClosing) {
+            return "<{$this->tagName}{$classAttr}/>";
+        }
+        return "<{$this->tagName}{$classAttr}>{$this->getInnerHTML()}</{$this->tagName}>";
+    }
+
+    public function getOuterStateHTML(): string {
+        return $this->state->render($this);
+    }
+
+    public function getTagName(): string {
+        return $this->tagName;
+    }
+
+    public function getCssClasses(): array {
+        return $this->cssClasses;
+    }
+
+    public function setCssClasses(array $classes): void {
+        $this->cssClasses = $classes;
+    }
+
 }
