@@ -2,6 +2,7 @@
 
 require_once 'LightTextNode.php';
 require_once 'LightElementNode.php';
+require_once 'LightNodeIterator.php';
 
 $ul = new LightElementNode('ul', 'block');
 $ul->addClass('my-list');
@@ -34,3 +35,18 @@ echo "\nInner HTML:\n";
 echo $ul->getInnerHTML() . "\n";
 
 echo "\nКількість дочірніх елементів у <ul>: " . $ul->getChildCount() . "\n";
+
+
+require_once 'LightNodeIterator.php';
+
+echo "\nDFS Traversal:\n";
+$dfs = new LightNodeIterator($ul, 'DFS');
+foreach ($dfs as $node) {
+    echo get_class($node) . ': ' . $node->getOuterHTML() . "\n";
+}
+
+echo "\nBFS Traversal:\n";
+$bfs = new LightNodeIterator($ul, 'BFS');
+foreach ($bfs as $node) {
+    echo get_class($node) . ': ' . $node->getOuterHTML() . "\n";
+}

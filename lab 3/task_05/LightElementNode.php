@@ -60,4 +60,9 @@ class LightElementNode implements LightNode {
             }
         }
     }
+
+    public function getChildren(): array {
+        return $this->children;
+    }
+
 }
