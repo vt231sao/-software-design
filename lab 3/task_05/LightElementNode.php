@@ -14,6 +14,39 @@ class LightElementNode implements LightNode {
         $this->tagName = $tagName;
         $this->displayType = $displayType;
         $this->selfClosing = $selfClosing;
+
+        $this->onCreated();
+    }
+
+    public function renderWithLifecycle(): string {
+        $this->onInserted();
+        $this->onStylesApplied();
+        $this->onClassListApplied();
+        if (!empty($this->children)) {
+            $this->onTextRendered();
+        }
+
+        return $this->getOuterStateHTML(); // враховує State
+    }
+
+    protected function onCreated(): void {
+        echo "[Hook] {$this->tagName} created\n";
+    }
+
+    protected function onInserted(): void {
+        echo "[Hook] {$this->tagName} inserted into DOM\n";
+    }
+
+    protected function onStylesApplied(): void {
+        echo "[Hook] Styles applied to {$this->tagName}\n";
+    }
+
+    protected function onClassListApplied(): void {
+        echo "[Hook] Class list applied to {$this->tagName}\n";
+    }
+
+    protected function onTextRendered(): void {
+        echo "[Hook] Text rendered inside {$this->tagName}\n";
     }
 
     public function addClass(string $className): void {
