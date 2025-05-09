@@ -16,4 +16,8 @@ class LightTextNode implements LightNode {
     public function getOuterHTML(): string {
         return $this->text;
     }
+
+    public function accept(NodeVisitor $visitor): void {
+        $visitor->visitText($this);
+    }
 }
