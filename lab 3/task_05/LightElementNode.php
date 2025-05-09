@@ -4,10 +4,11 @@ require_once 'LightNode.php';
 
 class LightElementNode implements LightNode {
     private string $tagName;
-    private string $displayType; // block | inline
+    private string $displayType;
     private bool $selfClosing;
     private array $cssClasses = [];
     private array $children = [];
+    private array $eventListeners = [];
 
     public function __construct(string $tagName, string $displayType = "block", bool $selfClosing = false) {
         $this->tagName = $tagName;
@@ -47,4 +48,21 @@ class LightElementNode implements LightNode {
     public function getChildCount(): int {
         return count($this->children);
     }
+
+    public function addEventListener(string $eventName, callable $callback): void {
+        $this->eventListeners[$eventName][] = $callback;
+    }
+
+    public function triggerEvent(string $eventName): void {
+        if (!empty($this->eventListeners[$eventName])) {
+            foreach ($this->eventListeners[$eventName] as $callback) {
+                $callback($this);
+            }
+        }
+    }
+
+    public function getChildren(): array {
+        return $this->children;
+    }
+
 }
