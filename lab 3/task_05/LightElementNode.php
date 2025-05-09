@@ -65,4 +65,9 @@ class LightElementNode implements LightNode {
         return $this->children;
     }
 
+
+    public function removeClass(string $className): void {
+        $this->cssClasses = array_filter($this->cssClasses, fn($cls) => $cls !== $className);
+    }
+
 }
