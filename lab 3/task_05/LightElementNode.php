@@ -138,4 +138,8 @@ class LightElementNode implements LightNode {
         $this->cssClasses = $classes;
     }
 
+
+    public function accept(NodeVisitor $visitor): void {
+        $visitor->visitElement($this);
+    }
 }
